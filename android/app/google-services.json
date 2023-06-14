@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "604652160450",
+    "project_id": "smartserve-faa82",
+    "storage_bucket": "smartserve-faa82.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:604652160450:android:5a83710afd64d06e72c25b",
+        "android_client_info": {
+          "package_name": "com.example.serves"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "604652160450-dhg217teijq2hu2qffhdl5siq5bnrmv3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjLaTSABOukqm22cRQzdpA3gF5lKxAZHs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "604652160450-dhg217teijq2hu2qffhdl5siq5bnrmv3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
