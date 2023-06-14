@@ -1,5 +1,4 @@
 // ignore_for_file: dead_code
-
 import 'package:serves/ScreensByAhmed/Home.dart';
 import 'package:serves/screens/signup_screen.dart';
 import 'package:serves/widgets/customized_textfield.dart';
@@ -27,40 +26,43 @@ class _LoginScreenState extends State<LoginScreen> {
     final password = _passwordController.text.trim();
 
     try {
-      final response = await http.post(Uri.parse('$baseUrl/login'),
-          headers: {'Content-Type': 'application/json'},
-          body: json.encode({'email': email, 'password': password}));
+      final response = await http.post(
+        Uri.parse('$baseUrl/login'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'email': email, 'password': password}),
+      );
       final jsonResponse = json.decode(response.body);
       final status = jsonResponse['status'];
       final userId = jsonResponse['id'];
-      // print(jsonResponse);
-      // Navigator.pushAndRemoveUntil(
-      //     context,
-      //     MaterialPageRoute(builder: (context) => HomeScreen(user: userId)),
-      //     (route) => false);
-      // return;
-      print(response.body);
+
       if (status == 200) {
         token = json.decode(response.body)['token'] as String;
+
         SharedPreferences prefs = await SharedPreferences.getInstance();
 
         final expirationTime = DateTime.now().millisecondsSinceEpoch +
             1200000; //CHANGE KARNA HA ISKO
         await prefs.setString('token', token!);
-        // await prefs.setString('userId', userId);
+
         await prefs.setInt("expirationTime", expirationTime);
-        // await prefs.setString('userId', userId!);
-        print("here");
+
+        await prefs.setInt('id', userId); // Store the "id" in SharedPreferences
+
+        Set<String> keys = prefs.getKeys();
+        for (String key in keys) {
+          dynamic value = prefs.get(key);
+          print('HIII$key: $value');
+        }
+
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (context) => HomeScreen(user: userId)),
             (route) => true);
+
         setState(() {
           token = token;
         });
-        // ignore: use_build_context_synchronously
       } else if (status == 401) {
-        // ignore: use_build_context_synchronously
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -78,7 +80,6 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         );
       } else if (status == 400) {
-        // ignore: use_build_context_synchronously
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
