@@ -9,16 +9,18 @@ import 'package:serves/term_and_conditions/termsandconditions.dart';
 import 'package:serves/widgets/global_variable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../faqs/FAQS.dart';
-import '../screens/mybooking.dart';
+import '../my_bookings/mybooking.dart';
 
 import '../reviews/reviews2.dart';
 import 'package:http/http.dart' as http;
 
+// ignore: must_be_immutable
 class HomeScreen extends StatefulWidget {
   int? user;
   HomeScreen({super.key, this.user});
 
   @override
+  // ignore: library_private_types_in_public_api
   _HomeScreenState createState() => _HomeScreenState();
 }
 
@@ -121,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (_) => const BookTableScreen()));
+                                builder: (_) => BookTableScreen()));
                       },
                       child: Container(
                         margin: const EdgeInsets.all(10),
@@ -204,8 +206,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (_) => const BookingScreen(
-                                  tableNumber: 10, timeRemainingInMinutes: 5)));
+                              builder: (_) => const BookingScreen()));
                     },
                     child: Container(
                       margin: const EdgeInsets.all(10),

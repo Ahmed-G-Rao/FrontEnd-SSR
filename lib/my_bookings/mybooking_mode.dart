@@ -1,9 +1,9 @@
-class TablesModel {
+class MyBookingModel {
   List<Data>? data;
 
-  TablesModel({this.data});
+  MyBookingModel({this.data});
 
-  TablesModel.fromJson(Map<String, dynamic> json) {
+  MyBookingModel.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {
@@ -22,38 +22,42 @@ class TablesModel {
 }
 
 class Data {
+  String? orderId;
+  int? userId;
   int? tableId;
-  String? tableName;
-  int? capacity;
+  String? orderDetails;
+  int? amount;
+  String? orderedAt;
   String? status;
-  int? bookedBy;
-  String? bookedAt;
 
   Data(
-      {this.tableId,
-      this.tableName,
-      this.capacity,
-      this.status,
-      this.bookedBy,
-      this.bookedAt});
+      {this.orderId,
+      this.userId,
+      this.tableId,
+      this.orderDetails,
+      this.amount,
+      this.orderedAt,
+      this.status});
 
   Data.fromJson(Map<String, dynamic> json) {
+    orderId = json['order_id'];
+    userId = json['user_id'];
     tableId = json['table_id'];
-    tableName = json['table_name'];
-    capacity = json['capacity'];
+    orderDetails = json['order_details'];
+    amount = json['amount'];
+    orderedAt = json['ordered_at'];
     status = json['status'];
-    bookedBy = json['booked_by'];
-    bookedAt = json['booked_at'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['order_id'] = this.orderId;
+    data['user_id'] = this.userId;
     data['table_id'] = this.tableId;
-    data['table_name'] = this.tableName;
-    data['capacity'] = this.capacity;
+    data['order_details'] = this.orderDetails;
+    data['amount'] = this.amount;
+    data['ordered_at'] = this.orderedAt;
     data['status'] = this.status;
-    data['booked_by'] = this.bookedBy;
-    data['booked_at'] = this.bookedAt;
     return data;
   }
 }
