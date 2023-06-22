@@ -58,72 +58,77 @@ class _MenuScreenState extends State<MenuScreen> {
           return ListView.builder(
             itemCount: snapshot.data!.foods!.length,
             itemBuilder: (BuildContext context, int index) {
-              return InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => MenuItemScreen(
-                              title:
-                                  snapshot.data!.foods![index].name.toString(),
-                              description: snapshot
-                                  .data!.foods![index].description
-                                  .toString(),
-                              price:
-                                  snapshot.data!.foods![index].price.toString(),
-                              imagePath:
-                                  snapshot.data!.images![index].path.toString(),
-                            )),
-                  );
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                          width: 100,
-                          height: 100,
-                          child: Image.asset(
-                              "D:/Ahmed/GIT/SmartServe/Backend-SSR-master(new)/Backend-SSR-master/resources/static/assets/uploads/profiles/image.jpg")),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              snapshot.data!.foods![index].name.toString(),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
+              if (index < snapshot.data!.foods!.length &&
+                  index < snapshot.data!.images!.length) {
+                return InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => MenuItemScreen(
+                                title: snapshot.data!.foods![index].name
+                                    .toString(),
+                                description: snapshot
+                                    .data!.foods![index].description
+                                    .toString(),
+                                price: snapshot.data!.foods![index].price
+                                    .toString(),
+                                imagePath: snapshot.data!.images![index].path
+                                    .toString(),
+                              )),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                            width: 100,
+                            height: 100,
+                            child: Image.network(
+                                '${baseUrl}${snapshot.data!.images![index].path.toString()}')),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                snapshot.data!.foods![index].name.toString(),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              snapshot.data!.foods![index].description
-                                  .toString(),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(fontSize: 16),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              snapshot.data!.foods![index].price.toString(),
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey[700],
+                              const SizedBox(height: 5),
+                              Text(
+                                snapshot.data!.foods![index].description
+                                    .toString(),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(fontSize: 16),
                               ),
-                            ),
-                          ],
+                              const SizedBox(height: 5),
+                              Text(
+                                snapshot.data!.foods![index].price.toString(),
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey[700],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              );
+                );
+              } else {
+                return const SizedBox(); // Placeholder widget or handle the error case
+              }
             },
           );
         },

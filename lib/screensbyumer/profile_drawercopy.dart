@@ -30,7 +30,7 @@ class _ProfileScreenState extends State<MyProfileScreen> {
     userId = prefs.getString("userId");
     if (userId != null) {
       final response = await http.post(
-        Uri.parse('$baseUrl/GetUserProfileById'),
+        Uri.parse('http://ssr.coderouting.com/GetUserProfileById'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({'user_id': userId}),
       );

@@ -25,7 +25,8 @@ class _BookingScreenState extends State<BookingScreen> {
   Future<MyBookingModel> getBookings() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final userId = prefs.getInt("id");
-    final response = await http.post(Uri.parse('$baseUrl/GetOrderByUserId'),
+    final response = await http.post(
+        Uri.parse('http://ssr.coderouting.com/GetOrderByUserId'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           "user_id": userId,
@@ -36,6 +37,26 @@ class _BookingScreenState extends State<BookingScreen> {
       return MyBookingModel.fromJson(data);
     } else {
       return MyBookingModel.fromJson(data);
+    }
+  }
+
+  Future<void> cancelOrder(String orderId) async {
+    // Perform the cancellation logic here using the order_id
+    // For example, you can make an API call to cancel the order
+    final response = await http.post(
+      Uri.parse('http://ssr.coderouting.com/CancelOrder'),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode({
+        "order_id": orderId,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      // Order cancellation successful
+      print('Order cancelled successfully');
+    } else {
+      // Order cancellation failed
+      print('Failed to cancel order');
     }
   }
 
@@ -119,7 +140,7 @@ class _BookingScreenState extends State<BookingScreen> {
                     const SizedBox(height: 16.0),
                     ElevatedButton(
                       onPressed: () {
-                        // Perform action when cancel button is pressed
+                        cancelOrder(booking.orderId.toString()); // Pass order_id to the cancelOrder function
                       },
                       child: const Text('Cancel'),
                     ),

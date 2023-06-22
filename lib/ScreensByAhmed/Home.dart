@@ -81,7 +81,8 @@ class _HomeScreenState extends State<HomeScreen> {
   void fetchUserData() async {
     Navigator.push(
         context, MaterialPageRoute(builder: (_) => MyProfileScreen()));
-    final response = await http.get(Uri.parse("{$baseUrl}/${widget.user}"));
+    final response = await http
+        .get(Uri.parse("{http://ssr.coderouting.com}/${widget.user}"));
     final jsonResponse = json.decode(response.body);
     setState(() {
       name = jsonResponse['data'][0]['name'];
@@ -99,14 +100,14 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: nullifyToken,
           ),
           // ignore: unnecessary_null_comparison
-          if (name != null)
-            Padding(
-              padding: const EdgeInsets.only(right: 10.0),
-              child: InkWell(
-                onTap: fetchUserData,
-                child: CircleAvatar(child: Icon(Icons.person)),
-              ),
-            ),
+          // if (name != null)
+          //   Padding(
+          //     padding: const EdgeInsets.only(right: 10.0),
+          //     child: InkWell(
+          //       onTap: fetchUserData,
+          //       child: CircleAvatar(child: Icon(Icons.person)),
+          //     ),
+          //   ),
         ],
       ),
       body: Container(

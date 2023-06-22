@@ -62,10 +62,10 @@ class _SplashScreenState extends State<SplashScreen>
               child: const SizedBox(
                 height: 130,
                 width: 180,
-                child: Image(
-                  image: AssetImage("assets/images/logo.png"),
-                  fit: BoxFit.cover,
-                ),
+                // child: Image(
+                //   image: AssetImage("assets/images/logo.png"),
+                //   fit: BoxFit.cover,
+                // ),
               ),
             ),
             const SizedBox(height: 40),
@@ -94,9 +94,9 @@ class WelcomeScreen extends StatelessWidget {
             const SizedBox(
               height: 130,
               width: 180,
-              child: Image(
-                  image: AssetImage("assets/images/logo.png"),
-                  fit: BoxFit.cover),
+              // child: Image(
+              //     image: AssetImage("assets/images/logo.png"),
+              //     fit: BoxFit.cover),
             ),
             const SizedBox(height: 40),
             CustomizedButton(

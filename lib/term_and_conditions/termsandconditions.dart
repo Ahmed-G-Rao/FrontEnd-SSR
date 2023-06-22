@@ -9,8 +9,8 @@ class TermsAndConditionsScreen extends StatelessWidget {
   const TermsAndConditionsScreen({Key? key}) : super(key: key);
 
   Future<TermsAndConditions> fetchAllData() async {
-    final response =
-        await http.get(Uri.parse('$baseUrl/GetTermsAndConditions'));
+    final response = await http
+        .get(Uri.parse('http://ssr.coderouting.com/GetTermsAndConditions'));
     var data = jsonDecode(response.body.toString());
     if (response.statusCode == 200) {
       return TermsAndConditions.fromJson(data);

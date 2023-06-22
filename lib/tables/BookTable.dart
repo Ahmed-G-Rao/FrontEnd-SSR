@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:serves/widgets/global_variable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../ScreensByAhmed/OrderFood.dart';
+import '../FoodOrder/OrderFood.dart';
 
 class BookTableScreen extends StatefulWidget {
   @override
@@ -27,8 +27,10 @@ class _BookTableScreenState extends State<BookTableScreen> {
   }
 
   Future<TablesModel> getTables() async {
-    final response = await http.get(Uri.parse('$baseUrl/GetAvailableTables'));
+    print("here");
+    final response = await http.get(Uri.parse('${baseUrl}/GetAvailableTables'));
     var data = jsonDecode(response.body.toString());
+    // print(data);
     if (response.statusCode == 200) {
       return TablesModel.fromJson(data);
     } else {
@@ -41,16 +43,25 @@ class _BookTableScreenState extends State<BookTableScreen> {
     final userId = prefs.getInt("id");
 
     // Implement the logic to book the selected table
-    final response = await http.post(Uri.parse('$baseUrl/AddOrder'),
-        headers: {'Content-Type': 'application/json'},
-        body: json.encode({
-          "user_id": userId,
-          "table_id": tableId,
-          "order_details": "",
-          "amount": "",
-          "status": "Pending"
-        }));
+    final response =
+        await http.post(Uri.parse('http://ssr.coderouting.com/AddOrder'),
+            headers: {'Content-Type': 'application/json'},
+            body: json.encode({
+              "user_id": userId,
+              "table_id": tableId,
+              "order_details": "",
+              "amount": "",
+              "status": "Pending"
+            }));
+    // final response2 = await http.post(
+    //     Uri.parse('http://ssr.coderouting.com/UpdateTableStatus'),
+    //     headers: {'Content-Type': 'application/json'},
+    //     body: json.encode({"table_id": tableId}));
+    var jsonResponse = jsonDecode(response.body.toString());
+    var OrderId = jsonResponse['order_id'];
+    await prefs.setString('order_id', OrderId);
     if (response.statusCode == 200) {
+      print(OrderId);
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -71,7 +82,9 @@ class _BookTableScreenState extends State<BookTableScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const FoodMenuScreen()),
+                        builder: (context) => FoodMenuScreen(
+                              order_id: OrderId,
+                            )),
                   );
                 },
               ),

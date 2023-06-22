@@ -9,7 +9,8 @@ class FaqsScreen extends StatelessWidget {
   const FaqsScreen({Key? key});
 
   Future<FAQsModel> fetchAllData() async {
-    final response = await http.get(Uri.parse('$baseUrl/GetFAQs'));
+    final response =
+        await http.get(Uri.parse('http://ssr.coderouting.com/GetFAQs'));
     var data = jsonDecode(response.body.toString());
     if (response.statusCode == 200) {
       return FAQsModel.fromJson(data);

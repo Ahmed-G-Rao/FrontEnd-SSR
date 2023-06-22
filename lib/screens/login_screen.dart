@@ -27,15 +27,17 @@ class _LoginScreenState extends State<LoginScreen> {
 
     try {
       final response = await http.post(
-        Uri.parse('$baseUrl/login'),
+        Uri.parse('http://ssr.coderouting.com/login'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({'email': email, 'password': password}),
       );
-      final jsonResponse = json.decode(response.body);
+      var jsonResponse = json.decode(response.body.toString());
+      // print("RESPOSNE RESPOSNERESPOSNERESPOSNERESPOSNERESPOSNE" + jsonResponse);
+      // print("response" + response.body.toString());
       final status = jsonResponse['status'];
       final userId = jsonResponse['id'];
 
-      if (status == 200) {
+      if (response.statusCode == 200) {
         token = json.decode(response.body)['token'] as String;
 
         SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -83,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Text("Invalid Username or password"),
+            title: const Text("Invalid Username or Password"),
             actions: [
               Center(
                 child: ElevatedButton(
