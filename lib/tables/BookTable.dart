@@ -34,7 +34,7 @@ class _BookTableScreenState extends State<BookTableScreen> {
     if (response.statusCode == 200) {
       return TablesModel.fromJson(data);
     } else {
-      throw Exception('Failed to load Tables');
+      throw TablesModel.fromJson(data);
     }
   }
 
@@ -134,9 +134,11 @@ class _BookTableScreenState extends State<BookTableScreen> {
                     child: Text('Error: ${snapshot.error}'),
                   );
                 }
-                if (!snapshot.hasData) {
+                if (!snapshot.hasData ||
+                    snapshot.data!.data == null ||
+                    snapshot.data!.data!.isEmpty) {
                   return const Center(
-                    child: Text('No data available'),
+                    child: Text('No Tables available'),
                   );
                 }
 

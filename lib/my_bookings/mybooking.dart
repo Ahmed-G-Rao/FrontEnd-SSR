@@ -124,12 +124,12 @@ class _BookingScreenState extends State<BookingScreen> {
                       ),
                     ),
                     const SizedBox(height: 8.0),
-                    Text(
-                      'Amount: \$${booking.amount}',
-                      style: const TextStyle(
-                        fontSize: 18.0,
-                      ),
-                    ),
+                    // Text(
+                    //   'Amount: \$${booking.amount}',
+                    //   style: const TextStyle(
+                    //     fontSize: 18.0,
+                    //   ),
+                    // ),
                     const SizedBox(height: 8.0),
                     Text(
                       'Status: ${booking.status}',
@@ -138,12 +138,19 @@ class _BookingScreenState extends State<BookingScreen> {
                       ),
                     ),
                     const SizedBox(height: 16.0),
-                    ElevatedButton(
-                      onPressed: () {
-                        cancelOrder(booking.orderId.toString()); // Pass order_id to the cancelOrder function
-                      },
-                      child: const Text('Cancel'),
+                    Text(
+                      '==================================',
+                      style: const TextStyle(
+                        fontSize: 18.0,
+                      ),
                     ),
+                    // ElevatedButton(
+                    //   onPressed: () {
+                    //     cancelOrder(booking.orderId
+                    //         .toString()); // Pass order_id to the cancelOrder function
+                    //   },
+                    //   child: const Text('Cancel'),
+                    // ),
                   ],
                 );
               },

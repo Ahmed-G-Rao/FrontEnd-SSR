@@ -56,7 +56,7 @@ class _FoodMenuScreenState extends State<FoodMenuScreen> {
     final orderData = {
       'order_id': orderId,
       'order_details': orderDetails,
-      'amount': totalAmount,
+      'amount': totalAmount.toString(),
     };
 
     final response = await http.post(
